@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from p_library import views
-from p_library.views import AuthorEdit, AuthorList, author_create_many
+from p_library.views import *
 app_name = 'p_library'
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,6 +24,7 @@ urlpatterns = [
     path('index/', views.index),
     path('index/book_increment/', views.book_increment),
     path('index/book_decrement/', views.book_decrement),
+    path('addfriend/', FriendAdd.as_view(), name='add_page')
 ]
 # from django.contrib import admin  
 # from django.urls import path  

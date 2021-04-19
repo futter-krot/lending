@@ -2,11 +2,12 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.template import loader
 from p_library.models import *
-from p_library.forms import AuthorForm 
+from p_library.forms import * 
 from django.views.generic import CreateView, ListView
 from django.urls import reverse_lazy
 from django.forms import formset_factory  
 from django.http.response import HttpResponseRedirect
+from django.views.generic import ListView, DetailView, CreateView
 def books_list(request):
     books = Book.objects.all()
     books_l = ['{}; '.format(book) for book in books]
@@ -65,8 +66,14 @@ class AuthorEdit(CreateView):
     form_class = AuthorForm  
     success_url = reverse_lazy('p_library:author_list')  
     template_name = 'author_edit.html'  
-  
-  
+class FriendAdd(CreateView):
+    model = Friend
+    form_class = FriendCreateForm
+    success_url = reverse_lazy("/")
+    template_name = "item_add.html"
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
 class AuthorList(ListView):  
     model = Author  
     template_name = 'authors_list.html'
