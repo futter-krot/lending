@@ -1,0 +1,3 @@
+# lending
+/addfriend
+Добавить друга
